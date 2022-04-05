@@ -1,9 +1,262 @@
-{% extends 'includes/layout.swig' %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
 
-{% block body %}
-<div class="blog-main-post">
-	<div class="index-post-br"></div>
-  {% include 'includes/recent-posts.swig' %}
-  {% include 'includes/pagination.swig' %}
- </div>
-{% endblock %}
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-title" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/05/title/" class="article-date">
+  <time datetime="2022-04-05T10:08:25.000Z" itemprop="datePublished">2022-04-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/05/title/">title</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><ul>
+<li><p><strong>HashMap</strong>：** JDK1.8 之前 <code>HashMap</code> 由<strong>数组+链表</strong>组成的，数组是 <code>HashMap</code> 的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）。JDK1.8 以后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树）时，将链表转化为红黑树，以减少搜索时间</p>
+<p>HashMap计算添加元素的位置时，使用的<strong>位运算，这是特别高效的运算</strong>；另外，HashMap的初始容量是2的n次幂，扩容也是2倍的形式进行扩容，是因为容量是2的n次幂，可以使得添加的<strong>元素均匀分布</strong>在HashMap中的数组上，减少hash碰撞，避免形成链表的结构，使得查询效率降低！</p>
+</li>
+<li><p><strong>LinkedHashMap</strong>： <code>LinkedHashMap</code> 继承自 <code>HashMap</code>，<strong>增加了一条双向链表</strong>，使得上面的结构可以保持键值对的插入顺序。同时通过对链表进行相应的操作，实现了访问顺序相关逻辑。</p>
+</li>
+<li><p><strong>Hashtable</strong>： <strong>数组+链表</strong>组成的，<code>Hashtable</code> 是线程安全的,因为 <code>Hashtable</code> 经过<code>synchronized</code> 修饰。</p>
+</li>
+<li><p><strong>TreeMap</strong>： <strong>红黑树</strong>（自平衡的排序二叉树）</p>
+<h3 id="HashMap-和-Hashtable-的区别"><a href="#HashMap-和-Hashtable-的区别" class="headerlink" title="HashMap 和 Hashtable 的区别"></a>HashMap 和 Hashtable 的区别</h3><p>线程，效率，nul，容量及扩充，底层</p>
+<h3 id="HashMap-和-HashSet-区别"><a href="#HashMap-和-HashSet-区别" class="headerlink" title="HashMap 和 HashSet 区别"></a>HashMap 和 HashSet 区别</h3><p>存储，hashcode</p>
+<h3 id="HashMap-和-TreeMap-区别"><a href="#HashMap-和-TreeMap-区别" class="headerlink" title="HashMap 和 TreeMap 区别"></a>HashMap 和 TreeMap 区别</h3><p><code>TreeMap</code>它还实现了<code>NavigableMap</code>接口（有了对集合内元素的搜索的能力）和<code>SortedMap</code> 接口（有了对集合中的元素根据键排序的能力）。<strong>只是红黑树罢了。</strong></p>
+</li>
+</ul>
+<p><img src="C:\Users\yanxi\AppData\Roaming\Typora\typora-user-images\1648987679190.png" alt="1648987679190"></p>
+<p><strong>HashMap线程不安全的原因</strong>**</p>
+<p><code>**HashMap</code>的线程不安全主要体现在下面两个方面：**<br><strong>1.在JDK1.7中，当并发执行扩容操作时会造成环形链和数据丢失的情况。</strong><br><strong>2.在JDK1.8中，在并发执行put操作时会发生数据覆盖的情况。</strong></p>
+<p><code>1.7HashMap</code>的扩容操作，重新定位每个桶的下标，并采用<strong>头插法</strong>将元素迁移到新数组中。头插法会将链表的顺序翻转，这也是形成死循环的关键点。<strong>transfer函数</strong></p>
+<p>线程A被挂起，始执行线程B，并在线程B中成功的完成了数据迁移，线程A获得CPU时间片继续执行。当线程A执行完后，<code>HashMap</code>中出现了环形结构，当在以后对该<code>HashMap</code>进行操作时会出现死循环。元素在扩容期间被莫名的丢失了，这就发生了<strong>数据丢失</strong>的问题。</p>
+<p>1.8找不到<code>transfer</code>函数，因为JDK1.8直接在<strong>resize函数</strong>中完成了数据迁移。另外说一句，JDK1.8在进行元素插入时使用的是<strong>尾插法</strong>。其中第六行代码是判断是否出现hash碰撞，假设两个线程A、B都在进行put操作，并且hash函数计算出的插入下标是相同的，这就导致了线程B插入的数据被线程A覆盖了。或者此时，线程A、B都执行了一次put操作，但是size的值只增加了1。</p>
+<p>JDK1.7和JDK1.8中HashMap为什么是线程不安全的？<a target="_blank" rel="noopener" href="https://blog.csdn.net/swpu_ocean/article/details/88917958">https://blog.csdn.net/swpu_ocean/article/details/88917958</a></p>
+<p><strong>ConcurrentHashMap</strong></p>
+<p><strong>底层数据结构：</strong> JDK1.7 的 <code>ConcurrentHashMap</code> 底层采用 <strong>分段的数组+链表</strong> 实现，JDK1.8 采用的数据结构跟 <code>HashMap1.8</code> 的结构一样，数组+链表/红黑二叉树。</p>
+<p><strong>实现线程安全的方式（重要）：</strong></p>
+<p> <strong>在 JDK1.7 的时候，ConcurrentHashMap（分段锁）</strong> 对整个桶数组进行了分割分段(<code>Segment</code>)，（一个 <code>Segment</code> 包含一个 <code>HashEntry</code> 数组）每一把锁只锁容器其中一部分数据，多线程访问容器里不同数据段的数据，就不会存在锁竞争，提高并发访问率。 </p>
+<p><strong>到了 JDK1.8 的时候已经摒弃了 Segment 的概念，而是直接用 Node 数组+链表+红黑树的数据结构来实现，并发控制使用 synchronized 和 CAS 来操作。</strong>（严重了使用锁）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/05/title/" data-id="cl1lzt3xg0001ogmbd9nohkkf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/05/hello-world/" class="article-date">
+  <time datetime="2022-04-05T08:05:32.773Z" itemprop="datePublished">2022-04-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/05/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/05/hello-world/" data-id="cl1lzt3x80000ogmb23vm7jrq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/05/title/">title</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/05/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
