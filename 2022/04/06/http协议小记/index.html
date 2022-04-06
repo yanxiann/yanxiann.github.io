@@ -1,0 +1,515 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="Hexo" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="Hexo" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="Hexo" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="Java" />
+
+
+<link rel="canonical" href="http://example.com/2022/04/06/http%E5%8D%8F%E8%AE%AE%E5%B0%8F%E8%AE%B0/">
+
+
+
+  <title>
+http协议小记 |
+研究导弹茶叶蛋 = Hexo</title>
+<meta name="generator" content="Hexo 5.4.1"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">http协议小记
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2022-04-06 23:07:23">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-04-06T23:07:23+08:00">2022-04-06</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">研究导弹茶叶蛋</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giciukx8a7j20zk0m8aio.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipey84bjtj20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipetv6p75j20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giclh5u05ej20zk0m87df.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giclize41wj20zk0m87gk.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipet8c1a2j20zk0m8kct.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/06/http%E5%8D%8F%E8%AE%AE%E5%B0%8F%E8%AE%B0/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="导弹哥">
+    <meta itemprop="description" content=", ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h4 id="协议解析"><a href="#协议解析" class="headerlink" title="协议解析"></a><strong>协议解析</strong></h4><p>http协议默认是80，但是http:\8080就改变了端口号。</p>
+<p>在TCP/IP的模型图中，读者可以看到，HTTP协议位于最上层的<span class="exturl" data-url="aHR0cHM6Ly9zby5jc2RuLm5ldC9zby9zZWFyY2g/cT0lRTUlQkElOTQlRTclOTQlQTglRTUlQjElODImc3BtPTEwMDEuMjEwMS4zMDAxLjcwMjA=">应用层</span>，它是互联网上应用最为广泛的一种网络协议，所有的WWW文件都必须遵守这个协议。</p>
+<p>HTTP是一个由请求和响应组成的、标准的客户端/服务器端模型(B/S结构)。HTTP协议永远是由客户端发起请求，服务器端给予响应，</p>
+<p>HTTP是一种无状态协议。无状态是指客户端和服务器端之间不需要建立持久的连接，客户端发起一个请求，服务器端返回响应，这个连接就会被关闭，在服务器端不会保留该请求的有关信息。</p>
+<p><strong>HTTP的工作流程如下。</strong></p>
+<p><strong>1．地址解析</strong></p>
+<p>HTTP协议是通过标准URL来请求指定的服务器中的指定服务的。一个标准的URL如下：</p>
+<p><span class="exturl" data-url="aHR0cDovL3d3dy5iYWlkdS5jb20vaW5kZXguaHRtbD9uYW1lPXRvbSZhbXA7YWdlPTE4">http://www.baidu.com:80/index.html?name=tom&amp;age=18</span></p>
+<p>下面来拆分一下URL，看看这些组成都是做什么的：</p>
+<p><strong>(1)http：协议类型</strong>。这里指的是要发送的是什么协议，还可以是FTP等其他协议。而这里请求的是服务器中的网页，所以使用的是常见的HTTP协议。</p>
+<p><strong>(2)<span class="exturl" data-url="aHR0cDovL3d3dy5iYWlkdS5jb23vvJrkuLvmnLrlkI0=">www.baidu.com：主机名</span></strong>。通过主机名，可以准确定位到要访问的那台服务器。而在前面说的网络通信中，IP是可以唯一表示服务器地址的，但IP烦琐复杂，很难记忆，所以人们就想了个办法，通过熟悉的英文、数字等来表示一台服务器的地址，称为域名。这样就需要一个文件(作为一个数据仓库)把IP和域名一一对应起来。在很早的时候，我们确实是这么做的，不过随着IP越来越多，文件也变得越来越大，不堪负重。于是人们就想到了把这些一一对应的关系都放到一台统一的服务器上，这台服务器被称为DNS域名解析系统，它会把域名解析成对应的IP。</p>
+<p><strong>(3)80：端口号</strong>。用户已经可以通过域名或者IP访问到一台服务器了，但是一台服务器里有那么多的服务和应用，怎样才能准确找到用户需要访问的那个服务或应用呢？在服务器中，每个服务和应用都会开启一个进程，都会有一个进程号(PID)，如果对外提供服务，则还会有一个唯一的端口号，这让外部应用可以直接通过这个端口号访问到指定的服务和应用。端口号的范围是0～65 535，一些常用的服务和应用都有默认的端口号，一般不能轻易更改，比如Web服务器的80端口、远程连接SSH服务的22端口、数据库MySQL的3306端口等等。因为80端口是Web服务器的默认端口，所以在写HTTP请求的URL的时候，80端口一般是省略的。</p>
+<p><strong>(4)index.html：请求的文件名</strong>。用户通过域名和端口号已经能访问到Web服务器了，接下来就可以通过文件名来访问指定的文件了。Web服务器一般都做好了路由，不同的路由所提供的访问文件的形式可能不一样，但核心都是一样的。</p>
+<p><strong>(5)?name=tom&amp;age=18：请求参数</strong>。即使同一个网页，可能针对不同的用户，服务器要返回给客户端的信息也是不一样的。而服务器就是通过URL中“?”后面携带的参数不同来响应不同的用户或者同一个用户的不同请求的。</p>
+<p>浏览器或者HttpClient在发送数据时，同样需要按照Http协议来构造数据（字符串），然后将字符串转成字节发送出去，所以Tomcat解析字节流的逻辑就是：</p>
+<ol>
+<li>从获得的第一个字节开始，遍历每个字节，当遇到空格时，那么之前所遍历到的字节数据就是<strong>请求方法</strong></li>
+<li>然后继续遍历每个字节，当遇到空格时，那么之前遍历到的字节数据就是<strong>URL</strong></li>
+<li>然后继续遍历每个字节，当遇到回车、换行符时，那么之前遍历到的字节数据就是协议版本，并且表示<strong>请求行</strong>遍历结束</li>
+<li>然后继续遍历当遇到一个回车符和换行符时，那么所遍历的数据就是一个<strong>请求头</strong></li>
+<li>继续遍历当遍历到两个回车符和换行符时，那么所遍历的数据就是一个请求头，并且表示请求头全部遍历完毕</li>
+<li>剩下的字节流数据就表示请求体</li>
+</ol>
+<p><strong>2．封装HTTP请求</strong></p>
+<p><u>这一步会把上面写的URL以及本机的一些信息封装成一个HTTP请求数据包</u></p>
+<p>HTTP中的请求头由三部分组成：请求行、请求头和请求正文</p>
+<p><strong>（1）．请求行</strong></p>
+<p>请求的第一行是请求行，里面有请求方法、URL、协议版本等。比如图2-10，请求的方法是GET，请求的URL是/ ，协议版本是HTTP/1.1。</p>
+<p>常见的请求方式有GET和POST。GET方式主要用于获取网络资源，POST方式主要用于表单提交。由于GET方式的参数是在地址栏中的，所以总是可见的，不是很安全，而且长度也有限制。而POST方式的参数是封装成实体之后发送给服务器的，是不可见的，相对比较安全，用户的敏感信息一般采用POST方式提交。</p>
+<p><strong>（2）．请求头</strong></p>
+<p>每个头域都由一个头域名、冒号和值域组成。下面介绍一些常见的头域。</p>
+<p>(1)Connetion：表示是否需要持久连接。</p>
+<p>(2)Host：这个是必需的，表示请求的服务器地址是什么，是从URL中提取出来的</p>
+<p>(3)Accept：浏览器可以接受的媒体类型(MIME类型)</p>
+<p>(4)Accept-Encoding：浏览器申明自己接受的编码方法，通常指定压缩方法、是否支持压缩、支持什么格式的压缩。</p>
+<p><strong>（3）．请求正文</strong></p>
+<p>也叫请求数据，在使用POST请求提交表单数据的时候，这些表单数据就会被放在HTTP请求的请求正文中，以加密的形式向服务器传输。</p>
+<p><img data-src="https://img-blog.csdnimg.cn/img_convert/3f33e6e36f2acffb276b086d10dfafd7.png" alt="img"></p>
+<p><strong>3．封装TCP包</strong></p>
+<p>第三步就是封装TCP包，建立TCP连接，也就是常说的“三次握手”。由于HTTP位于最上层的应用层，所以HTTP在工作之前要先由TCP和IP协议建立网络连接，这就是TCP/IP协议族，因此互联网又被称为TCP/IP网络。</p>
+<p><strong>4．客户端发送请求命令</strong></p>
+<p>第四步就是在连接建立之后，客户端发送HTTP请求到服务器端，与请求相关的信息都会包含在请求头和请求体中发送给服务器端。</p>
+<p><strong>5．服务器端响应</strong></p>
+<p>服务器在收到请求之后，根据客户端的请求发送给客户端相应的信息。相关的响应信息都会放在响应头和响应体中。</p>
+<p><strong>6．关闭连接</strong></p>
+<p>服务器端在发送完响应之后，就会关闭连接。如果客户端的请求的头信息中有Connection-alive，那么服务器端在响应完这个请求之后不会关闭连接，直到该客户端的所有请求都响应完毕，才会关闭连接，这样大大节省了带宽和I/O资源。</p>
+<p>http端口_细说HTTP协议及其工作流程<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTUxNjg2NS9hcnRpY2xlL2RldGFpbHMvMTEwNzA3MDAy">https://blog.csdn.net/weixin_39516865/article/details/110707002</span></p>
+<h4 id="1-0-1-1-2-0区别"><a href="#1-0-1-1-2-0区别" class="headerlink" title="1.0 1.1 2.0区别"></a><strong>1.0 1.1 2.0区别</strong></h4><p>影响一个 HTTP 网络请求的因素主要有两个：<strong>带宽和延迟。</strong></p>
+<ul>
+<li><strong>带宽：</strong>如果说我们还停留在拨号上网的阶段，带宽可能会成为一个比较严重影响请求的问题，但是现在网络基础建设已经使得带宽得到极大的提升，我们不再会担心由带宽而影响网速，那么就只剩下延迟了。</li>
+<li><strong>延迟：</strong><ul>
+<li>浏览器阻塞（HOL blocking）</li>
+<li>DNS 查询（DNS Lookup）</li>
+<li>建立连接（Initial connection）</li>
+</ul>
+</li>
+</ul>
+<p><strong>TTP1.0和HTTP1.1的一些区别</strong></p>
+<ol>
+<li><strong>缓存处理</strong>，在HTTP1.0中主要使用header里的If-Modified-Since,Expires来做为缓存判断的标准，HTTP1.1则<strong>引入了更多的缓存控制策略</strong>例如Entity tag，If-Unmodified-Since, If-Match, If-None-Match等更多可供选择的缓存头来控制缓存策略。</li>
+<li><strong>带宽优化及网络连接的使用</strong>，HTTP1.0中，存在一些浪费带宽的现象，例如客户端只是需要某个对象的一部分，而服务器却将整个对象送过来了，并且不支持断点续传功能，HTTP1.1则在请求头<strong>引入了range头域</strong>，它<strong>允许只请求资源的某个部分</strong>，即返回码是206（Partial Content），这样就方便了开发者自由的选择以便于充分利用带宽和连接。</li>
+<li><strong>错误通知的管理</strong>，在HTTP1.1中新增了24个错误状态响应码，如409（Conflict）表示请求的资源与资源的当前状态发生冲突；410（Gone）表示服务器上的某个资源被永久性的删除。</li>
+<li><strong>Host头处理</strong>，在HTTP1.0中认为每台服务器都绑定一个唯一的IP地址，因此，请求消息中的URL并没有传递主机名（hostname）。但随着虚拟主机技术的发展，在一台物理服务器上可以存在多个虚拟主机（Multi-homed Web Servers），并且它们共享一个IP地址。HTTP1.1的请求消息和响应消息都应支持Host头域，且请求消息中如果没有Host头域会报告一个错误（400 Bad Request）。</li>
+<li><strong>长连接</strong>，HTTP 1.1支持长连接（PersistentConnection）和请求的流水线（Pipelining）处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟，在HTTP1.1中默认开启Connection： keep-alive，一定程度上弥补了HTTP1.0每次请求都要创建连接的缺点。</li>
+</ol>
+<p><strong>HTTPS与HTTP的一些区别</strong></p>
+<ul>
+<li>HTTPS协议需要到CA申请证书，一般免费证书很少，需要交费。</li>
+<li>HTTP协议运行在TCP之上，所有传输的内容都是明文，HTTPS运行在SSL/TLS之上，SSL/TLS运行在TCP之上，所有传输的内容都经过加密的。</li>
+<li>HTTP和HTTPS使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</li>
+<li>HTTPS可以有效的防止运营商劫持，解决了防劫持的一个大问题。</li>
+</ul>
+<p><strong>SPDY：HTTP1.x的优化</strong></p>
+<p>2012年google如一声惊雷提出了SPDY的方案，优化了HTTP1.X的请求延迟，解决了HTTP1.X的安全性，具体如下：</p>
+<ol>
+<li><p><strong>降低延迟</strong>，针对HTTP高延迟的问题，SPDY优雅的采取了<strong>多路复用</strong>（multiplexing）。多路复用通过多个请求stream共享一个tcp连接的方式，解决了HOL blocking的问题，降低了延迟同时提高了带宽的利用率。</p>
+</li>
+<li><p><strong>请求优先级</strong>（request prioritization）。多路复用带来一个新的问题是，在连接共享的基础之上有可能会导致关键请求被阻塞。SPDY允许给每个request设置优先级，这样重要的请求就会优先得到响应。比如浏览器加载首页，首页的html内容应该优先展示，之后才是各种静态资源文件，脚本文件等加载，这样可以保证用户能第一时间看到网页内容。</p>
+</li>
+<li><p><strong>header压缩。</strong>前面提到HTTP1.x的header很多时候都是重复多余的。选择合适的压缩算法可以减小包的大小和数量。</p>
+</li>
+<li><p><strong>基于HTTPS的加密协议传输</strong>，大大提高了传输数据的可靠性。</p>
+</li>
+<li><p><strong>服务端推送</strong>（server push），采用了SPDY的网页，例如我的网页有一个sytle.css的请求，在客户端收到sytle.css数据的同时，服务端会将sytle.js的文件推送给客户端，当客户端再次尝试获取sytle.js时就可以直接从缓存中获取到，不用再发请求了。</p>
+<p><img data-src="http://mmbiz.qpic.cn/mmbiz_png/cmOLumrNib1cfBOtIMQ6JfSibJdd6QkQribjhshzcKo97UNNVIFgpOYZic95drsxo5TaiadPSSmcYhOI7GYAO99W6Sw/0?wx_fmt=png" alt="img"></p>
+</li>
+</ol>
+<p><strong>HTTP2.0和SPDY的区别：</strong></p>
+<ol>
+<li>HTTP2.0 支持明文 HTTP 传输，而 SPDY 强制使用 HTTPS</li>
+<li>HTTP2.0 消息头的压缩算法不同</li>
+</ol>
+<p><strong>HTTP2.0和HTTP1.X相比的新特性</strong></p>
+<ul>
+<li><strong>新的二进制格式</strong>（Binary Format），HTTP1.x的解析是基于文本。基于文本协议的格式解析存在天然缺陷，文本的表现形式有多样性，要做到健壮性考虑的场景必然很多，二进制则不同，只认0和1的组合。基于这种考虑HTTP2.0的协议解析决定采用二进制格式，实现方便且健壮。</li>
+<li><strong>多路复用</strong>（MultiPlexing），即连接共享，即每一个request都是是用作连接共享机制的。一个request对应一个id，这样一个连接上可以有多个request，每个连接的request可以随机的混杂在一起，接收方可以根据request的 id将request再归属到各自不同的服务端请求里面。</li>
+<li><strong>header压缩</strong>，如上文中所言，对前面提到过HTTP1.x的header带有大量信息，而且每次都要重复发送，HTTP2.0使用encoder来减少需要传输的header大小，通讯双方各自cache一份header fields表，既避免了重复header的传输，又减小了需要传输的大小。</li>
+<li><strong>服务端推送</strong>（server push），同SPDY一样，HTTP2.0也具有server push功能。</li>
+</ul>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vaGVsdWFuL3AvODYyMDMxMi5odG1s">HTTP1.0、HTTP1.1 和 HTTP2.0 的区别</span><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vaGVsdWFuL3AvODYyMDMxMi5odG0=">https://www.cnblogs.com/heluan/p/8620312.htm</span></p>
+<h4 id="粘包问题"><a href="#粘包问题" class="headerlink" title="粘包问题"></a><font color='orange'><strong>粘包问题</strong></font></h4><p>只在tcp协议下出现，不会出现在udp协议下：</p>
+<ul>
+<li><font color='red'>TCP协议是面向流的协议</font>，面向流的协议中，应用程序所看到的数据是一个整体，或说是一个流（stream），没有固有的”报文”或”报文边界”的概念，应用程序不知道一条消息或者一个请求是多少字节（tcp发送方知道一个多大，但是是完全连续发送的接收方犯了难），这就是tcp容易出现粘包问题的原因。tcp协议中，当对方send一条信息的时候，无论底层怎样分段分片，TCP协议层会把构成整条消息的数据段排序完成后才呈现在内核缓冲区。例如基于TCP的套接字客户端往服务端上传文件，发送时文件内容是按照一段一段的字节流发送的，在接收方看了，根本不知道该文件的字节流从何处开始，在何处结束。</li>
+<li><font color='red'>UDP是面向消息的协议</font>，每个UDP段都是一条消息，应用程序必须以消息为单位提取数据，不能一次提取任意字节的数据。UDP支持的是一对多的模式，所以接收端的socketbuff(套接字缓冲区）采用了链式结构来记录每一个到达的UDP包，在每个UDP包中含有消息头（消息来源地址，端口等信息），这样，对于接收端来说，就容易进行区分处理了。 即面向消息的通信是有消息保护边界的。</li>
+<li><font color='gree'>流与消息协议处理空数据问题</font>：基于数据流的，收发的消息不能为空，需要在客户端和服务端都添加空消息的处理机制，防止程序卡住；基于数据报（消息），即便是你输入的是空内容（直接回车），那也不是空消息，udp协议会帮你封装上消息头。</li>
+</ul>
+<p><strong>如何解决粘包问题？</strong></p>
+<p>值得注意的是，如果使用的是长连接，那么就有可能多个HTTP请求共用一个Socket连接，那么Tomcat在获取并解析Socket连接中的字节流时，该如何判断<br>某个HTTP请求的数据在哪个位置结束了呢？也就是如何判断一个请求的请求体何时结束？<br>有两种方式：</p>
+<ol>
+<li>请求头设置请求长度content-length：http协议请求的请求头内，有content-length，在请求头内，写明白请求行内有多长，这样就知道每个http请求多少个字节，这样就知道哪里作为断开边界。</li>
+<li>分块编码(Transfer-Encoding: chunked)：不依赖头部的长度信息,也能知道实体的边界。分块传输编码(Chunked transfer encoding)是超文本传输协议(HTTP)。请求体可以分为好多块，发送者要注意，分块传输要将数据分成一块一块的，每次传输一部分，并且在每块传输完成后，<font color='orange'>再发一块“chunk size==0 且包含两个回车换行”的数据，作为这个请求结束的标志</font>。比如长度为100的，每次分块30，那么会发送30,30,30,10,0这五个块。当接收方接收到0块时，就能知道一个请求结束了。</li>
+</ol>
+<blockquote>
+<p>长连接，同一个socket连接，多个http请求一个一个来，公用一个连接，不断开。第一个请求的请求体和第二个请求的请求行如何区分开呢？他们之间本身是连续着的。这叫<strong>“粘包问题”</strong>。tomcat不会处理长链接（tcp）（http1.1）的后包先到的问题，因为tcp已经解决。</p>
+<p>真正使用的时候，才会把字节转化为字符</p>
+<p>Socket和ServerSocket的简单介绍及例子<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNTE3OTM2L2FydGljbGUvZGV0YWlscy84MTAxNTcxMQ==">https://blog.csdn.net/qq_41517936/article/details/81015711</span></p>
+</blockquote>
+
+      <div class="tags">
+          <a href="/tags/Java/" rel="tag"><i class="ic i-tag"></i> Java</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2022-04-06 23:08:08" itemprop="dateModified" datetime="2022-04-06T23:08:08+08:00">2022-04-06</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>Give me a cup of [coffee]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="导弹哥 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="导弹哥 Alipay">
+        <p>Alipay</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>导弹哥 <i class="ic i-at"><em>@</em></i>Hexo
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="http://example.com/2022/04/06/http%E5%8D%8F%E8%AE%AE%E5%B0%8F%E8%AE%B0/" title="http协议小记">http://example.com/2022/04/06/http协议小记/</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/04/04/Map%E9%80%9F%E8%AE%B0/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipeuv80yoj20zk0m8kjl.jpg" title="Map速记">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> </span>
+  <h3>Map速记</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E8%A7%A3%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">协议解析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-0-1-1-2-0%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">1.0 1.1 2.0区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">粘包问题</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="导弹哥"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">导弹哥</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">3</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item email" data-url="bWFpbHRvOnlhbl94aWFuQGZveG1haWwuY29t" title="mailto:yan_xian@foxmail.com"><i class="ic i-envelope"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>Random Posts</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2022/04/04/Map%E9%80%9F%E8%AE%B0/" title="Map速记">Map速记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2022/04/06/http%E5%8D%8F%E8%AE%AE%E5%B0%8F%E8%AE%B0/" title="http协议小记">http协议小记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2022/02/04/%E5%B9%B6%E5%8F%91%E6%80%BB%E7%BB%93/" title="并发总结">并发总结</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>Recent Comments</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2022</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">导弹哥 @ 研究导弹茶叶蛋</span>
+  </div>
+  <div class="powered-by">
+    Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2022/04/06/http协议小记/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>
