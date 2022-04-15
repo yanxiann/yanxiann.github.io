@@ -102,12 +102,12 @@ LRU缓存一种节省资源的方式 |
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipexe4oykj20zk0m87ji.jpg"></li>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg"></li>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipevarprfj20zk0m8npd.jpg"></li>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg"></li>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giph4lm9i7j20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicm0fdw5cj20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclhtuo6nj20zk0m8ttm.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclx29mstj20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicli3sbvtj20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipevuctzzj20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclxxcb6rj20zk0m8b29.jpg"></li>
         </ul>
       </div>
     </header>
@@ -258,7 +258,6 @@ LRU缓存一种节省资源的方式 |
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">class Link&#123;</span><br><span class="line">    int key;</span><br><span class="line">    int val;</span><br><span class="line">    Link next;</span><br><span class="line">    Link pre;</span><br><span class="line">    public Link(int key,int val)&#123;</span><br><span class="line">        this.key=key;</span><br><span class="line">        this.val=val;</span><br><span class="line">    &#125;</span><br><span class="line">    public Link() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">class LRUCache &#123;</span><br><span class="line">    int capacity;</span><br><span class="line">    int size;</span><br><span class="line">    Map&lt;Integer,Link&gt; map;</span><br><span class="line">    Link head,tail;</span><br><span class="line"></span><br><span class="line">    public LRUCache(int capacity) &#123;</span><br><span class="line">        this.capacity=capacity;</span><br><span class="line">        map=new HashMap&lt;&gt;();</span><br><span class="line">        //只对头节点采用虚拟节点，因为尾节点采用虚拟节点浪费空间和时间</span><br><span class="line">        head=new Link();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public int get(int key) &#123;</span><br><span class="line">        if(!map.containsKey(key)) return -1;</span><br><span class="line">        Link temp=map.get(key);</span><br><span class="line">        //改变链表的指向，将其调至头节点</span><br><span class="line">        change(temp);</span><br><span class="line">        return temp.val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void put(int key, int value) &#123;</span><br><span class="line">    //采用懒汉式，put后才创建节点</span><br><span class="line">        if(size==0)&#123;</span><br><span class="line">            Link temp=new Link(key,value);</span><br><span class="line">            map.put(key,temp);</span><br><span class="line">            head.next=temp;</span><br><span class="line">            temp.pre=head;</span><br><span class="line">            tail=temp;</span><br><span class="line">            size++;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        //如果链表里有key，改变value，把此节点调至头部</span><br><span class="line">        if(map.containsKey(key))&#123;</span><br><span class="line">            Link temp=map.get(key);</span><br><span class="line">            replace(temp,key,value);</span><br><span class="line">        &#125;</span><br><span class="line">        //链表里不含有key的节点</span><br><span class="line">        else&#123;</span><br><span class="line">        	//链表池未满，直接添加</span><br><span class="line">            if(size&lt;capacity)&#123;</span><br><span class="line">                Link temp=new Link(key,value);</span><br><span class="line">                map.put(key,temp);</span><br><span class="line">                temp.pre=tail;</span><br><span class="line">                tail.next=temp;</span><br><span class="line">                tail=temp;</span><br><span class="line">                size++;</span><br><span class="line">            &#125;</span><br><span class="line">            //取代最不常使用的节点，改变其key与value即可</span><br><span class="line">            else&#123;</span><br><span class="line">            	//移除map</span><br><span class="line">                map.remove(head.next.key);</span><br><span class="line">                //取代节点</span><br><span class="line">                replace(head.next,key,value);</span><br><span class="line">                //添加map</span><br><span class="line">                map.put(key,tail);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //改变节点的位置，不替代节点的值</span><br><span class="line">    public void change(Link cur)&#123;</span><br><span class="line">        if(cur==tail) return;</span><br><span class="line">        cur.pre.next=cur.next;</span><br><span class="line">        cur.next.pre=cur.pre;</span><br><span class="line">        cur.pre=tail;</span><br><span class="line">        tail.next=cur;</span><br><span class="line">        tail=cur;</span><br><span class="line">        tail.next=null;</span><br><span class="line">    &#125;</span><br><span class="line">    //重新修改节点的属性，并且重新设置节点在链表的位置</span><br><span class="line">    public void replace(Link cur,int key,int value)&#123;</span><br><span class="line">        cur.key=key;</span><br><span class="line">        cur.val=value;</span><br><span class="line">        //节点在尾部，不需要改变位置</span><br><span class="line">        if(cur==tail) return;</span><br><span class="line">        cur.pre.next=cur.next;</span><br><span class="line">        cur.next.pre=cur.pre;</span><br><span class="line">        cur.pre=tail;</span><br><span class="line">        tail.next=cur;</span><br><span class="line">        tail=cur;</span><br><span class="line">        tail.next=null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>我们可以看到，我们只创建了指定容量的对象，对超出的对象属性修改进行修改即可。这样避免创建过多的对象，减少垃圾回收。</p>
-<p><strong>到了 JDK1.8 的时候已经摒弃了 Segment 的概念，而是直接用 Node 数组+链表+红黑树的数据结构来实现，并发控制使用 synchronized 和 CAS 来操作。</strong>（严重了使用锁）</p>
 
       <div class="tags">
           <a href="/tags/Java/" rel="tag"><i class="ic i-tag"></i> Java</a>
@@ -273,7 +272,7 @@ LRU缓存一种节省资源的方式 |
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">Edited on</span>
-    <time title="Modified: 2022-04-15 12:41:44" itemprop="dateModified" datetime="2022-04-15T12:41:44+08:00">2022-04-15</time>
+    <time title="Modified: 2022-04-15 12:51:15" itemprop="dateModified" datetime="2022-04-15T12:51:15+08:00">2022-04-15</time>
   </span>
 </div>
 
@@ -323,7 +322,7 @@ LRU缓存一种节省资源的方式 |
     <div class="item left">
       
 
-  <a href="/2022/04/11/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%B0%8F%E8%AE%B0/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipew8gmvyj20zk0m87wh.jpg" title="Spring全家桶速记">
+  <a href="/2022/04/11/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%B0%8F%E8%AE%B0/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipex2cdtbj20zk0m8x6p.jpg" title="Spring全家桶速记">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> </span>
   <h3>Spring全家桶速记</h3>
@@ -421,25 +420,25 @@ LRU缓存一种节省资源的方式 |
 <div class="breadcrumb">
 </div>
 
-    <span><a href="/2022/04/11/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%B0%8F%E8%AE%B0/" title="Spring全家桶速记">Spring全家桶速记</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2022/04/15/LRU%E7%BC%93%E5%AD%98/" title="LRU缓存一种节省资源的方式">LRU缓存一种节省资源的方式</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
     <span><a href="/2022/04/04/Map%E9%80%9F%E8%AE%B0/" title="Map速记">Map速记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2022/02/04/%E5%B9%B6%E5%8F%91%E6%80%BB%E7%BB%93/" title="并发总结">并发总结</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2022/04/11/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%B0%8F%E8%AE%B0/" title="Spring全家桶速记">Spring全家桶速记</a></span>
   </li>
 
       
@@ -457,7 +456,7 @@ LRU缓存一种节省资源的方式 |
 <div class="breadcrumb">
 </div>
 
-    <span><a href="/2022/02/04/%E5%B9%B6%E5%8F%91%E6%80%BB%E7%BB%93/" title="并发总结">并发总结</a></span>
+    <span><a href="/2022/04/15/LRU%E7%BC%93%E5%AD%98/" title="LRU缓存一种节省资源的方式">LRU缓存一种节省资源的方式</a></span>
   </li>
 
   </ul>
