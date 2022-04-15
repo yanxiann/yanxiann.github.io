@@ -1,0 +1,524 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="Hexo" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="Hexo" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="Hexo" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="Java" />
+
+
+<link rel="canonical" href="http://example.com/2022/04/15/LRU%E7%BC%93%E5%AD%98/">
+
+
+
+  <title>
+LRU缓存一种节省资源的方式 |
+研究导弹茶叶蛋 = Hexo</title>
+<meta name="generator" content="Hexo 5.4.1"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">LRU缓存一种节省资源的方式
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2022-04-15 10:17:29">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-04-15T10:17:29+08:00">2022-04-15</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">研究导弹茶叶蛋</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipexe4oykj20zk0m87ji.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipevarprfj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1giph4lm9i7j20zk0m84qp.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/15/LRU%E7%BC%93%E5%AD%98/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="导弹哥">
+    <meta itemprop="description" content=", ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h3 id="LRU缓存的作用"><a href="#LRU缓存的作用" class="headerlink" title="LRU缓存的作用"></a>LRU缓存的作用</h3><p>我们知道在虚拟内存的管理中有一种高效常用的页面置换算法。</p>
+<p><strong>LRU （Least Recently Used）页面置换算法</strong>（最近最久未使用页面置换算法） ：LRU 算法赋予每个页面一个访问字段，用来记录一个页面自上次被访问以来所经历的时间 T，当须淘汰一个页面时，选择现有页面中其 T 值最大的，即最近最久未使用的页面予以淘汰。</p>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>LRU缓存底层实现是LinkedHashMap，下面是我们常用的实现方式。</p>
+<p>LRU 缓存机制可以通过哈希表辅以双向链表实现，我们用一个哈希表和一个双向链表维护所有在缓存中的键值对。</p>
+<p>双向链表按照被使用的顺序存储了这些键值对，靠近头部的键值对是最近使用的，而靠近尾部的键值对是最久未使用的。</p>
+<p>哈希表即为普通的哈希映射（HashMap），通过缓存数据的键映射到其在双向链表中的位置。</p>
+<p>这样以来，我们首先使用哈希表进行定位，找出缓存项在双向链表中的位置，随后将其移动到双向链表的头部，即可在 O(1)O(1) 的时间内完成 get 或者 put 操作。具体的方法如下：</p>
+<ul>
+<li><p>对于 get 操作，首先判断 key 是否存在：</p>
+<p>​    如果 key 不存在，则返回 -1−1；</p>
+<p>​    如果 key 存在，则 key 对应的节点是最近被使用的节点。通过哈希表定位到该节点在双向链表中的位置，并将其移动到双向链表的头部，最后返回该节点的值。</p>
+</li>
+<li><p>对于 put 操作，首先判断 key 是否存在：</p>
+<p>​    如果 key 不存在，使用 key 和 value 创建一个新的节点，在双向链表的头部添加该节点，并将 key 和该节点添加进哈希表中。然后判断双向链表的节点数是否超出容量，如果超出容量，则删除双向链表的尾部节点，并删除哈希表中对应的项；</p>
+<p>​    如果 key 存在，则与 get 操作类似，先通过哈希表定位，再将对应的节点的值更新为 value，并将该节点移到双向链表的头部。</p>
+</li>
+</ul>
+<p>上述各项操作中，访问哈希表的时间复杂度为 O(1)O(1)，在双向链表的头部添加节点、在双向链表的尾部删除节点的复杂度也为 O(1)O(1)。而将一个节点移到双向链表的头部，可以分成「删除该节点」和「在双向链表的头部添加节点」两步操作，都可以在 O(1)O(1) 时间内完成。</p>
+<pre><code>public class LRUCache &#123;
+    class DLinkedNode &#123;
+        int key;
+        int value;
+        DLinkedNode prev;
+        DLinkedNode next;
+        public DLinkedNode() &#123;&#125;
+        public DLinkedNode(int _key, int _value) &#123;key = _key; value = _value;&#125;
+    &#125;
+    private Map&lt;Integer, DLinkedNode&gt; cache = new HashMap&lt;Integer, DLinkedNode&gt;();
+    private int size;
+    private int capacity;
+    private DLinkedNode head, tail;
+
+    public LRUCache(int capacity) &#123;
+        this.size = 0;
+        this.capacity = capacity;
+        // 使用伪头部和伪尾部节点
+        head = new DLinkedNode();
+        tail = new DLinkedNode();
+        head.next = tail;
+        tail.prev = head;
+    &#125;
+
+    public int get(int key) &#123;
+        DLinkedNode node = cache.get(key);
+        if (node == null) &#123;
+            return -1;
+        &#125;
+        // 如果 key 存在，先通过哈希表定位，再移到头部
+        moveToHead(node);
+        return node.value;
+    &#125;
+
+    public void put(int key, int value) &#123;
+        DLinkedNode node = cache.get(key);
+        if (node == null) &#123;
+            // 如果 key 不存在，创建一个新的节点
+            DLinkedNode newNode = new DLinkedNode(key, value);
+            // 添加进哈希表
+            cache.put(key, newNode);
+            // 添加至双向链表的头部
+            addToHead(newNode);
+            ++size;
+            if (size &gt; capacity) &#123;
+                // 如果超出容量，删除双向链表的尾部节点
+                DLinkedNode tail = removeTail();
+                // 删除哈希表中对应的项
+                cache.remove(tail.key);
+                --size;
+            &#125;
+        &#125;
+        else &#123;
+            // 如果 key 存在，先通过哈希表定位，再修改 value，并移到头部
+            node.value = value;
+            moveToHead(node);
+        &#125;
+    &#125;
+
+    private void addToHead(DLinkedNode node) &#123;
+        node.prev = head;
+        node.next = head.next;
+        head.next.prev = node;
+        head.next = node;
+    &#125;
+
+    private void removeNode(DLinkedNode node) &#123;
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    &#125;
+
+    private void moveToHead(DLinkedNode node) &#123;
+        removeNode(node);
+        addToHead(node);
+    &#125;
+
+    private DLinkedNode removeTail() &#123;
+        DLinkedNode res = tail.prev;
+        removeNode(res);
+        return res;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="新思路"><a href="#新思路" class="headerlink" title="新思路"></a>新思路</h3><p>从上文的分析中可以看出具体实现是删除链表中的节点，然后再重新创造一个节点。而我们可不可以对已创造的节点进行复用呢？</p>
+<p>答案是肯定的，池子的技术我们在很多地方都看到过，比如数据库连接池，线程池等。</p>
+<p>接下来看具体的代码实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">class Link&#123;</span><br><span class="line">    int key;</span><br><span class="line">    int val;</span><br><span class="line">    Link next;</span><br><span class="line">    Link pre;</span><br><span class="line">    public Link(int key,int val)&#123;</span><br><span class="line">        this.key=key;</span><br><span class="line">        this.val=val;</span><br><span class="line">    &#125;</span><br><span class="line">    public Link() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">class LRUCache &#123;</span><br><span class="line">    int capacity;</span><br><span class="line">    int size;</span><br><span class="line">    Map&lt;Integer,Link&gt; map;</span><br><span class="line">    Link head,tail;</span><br><span class="line"></span><br><span class="line">    public LRUCache(int capacity) &#123;</span><br><span class="line">        this.capacity=capacity;</span><br><span class="line">        map=new HashMap&lt;&gt;();</span><br><span class="line">        //只对头节点采用虚拟节点，因为尾节点采用虚拟节点浪费空间和时间</span><br><span class="line">        head=new Link();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public int get(int key) &#123;</span><br><span class="line">        if(!map.containsKey(key)) return -1;</span><br><span class="line">        Link temp=map.get(key);</span><br><span class="line">        //改变链表的指向，将其调至头节点</span><br><span class="line">        change(temp);</span><br><span class="line">        return temp.val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void put(int key, int value) &#123;</span><br><span class="line">    //采用懒汉式，put后才创建节点</span><br><span class="line">        if(size==0)&#123;</span><br><span class="line">            Link temp=new Link(key,value);</span><br><span class="line">            map.put(key,temp);</span><br><span class="line">            head.next=temp;</span><br><span class="line">            temp.pre=head;</span><br><span class="line">            tail=temp;</span><br><span class="line">            size++;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        //如果链表里有key，改变value，把此节点调至头部</span><br><span class="line">        if(map.containsKey(key))&#123;</span><br><span class="line">            Link temp=map.get(key);</span><br><span class="line">            replace(temp,key,value);</span><br><span class="line">        &#125;</span><br><span class="line">        //链表里不含有key的节点</span><br><span class="line">        else&#123;</span><br><span class="line">        	//链表池未满，直接添加</span><br><span class="line">            if(size&lt;capacity)&#123;</span><br><span class="line">                Link temp=new Link(key,value);</span><br><span class="line">                map.put(key,temp);</span><br><span class="line">                temp.pre=tail;</span><br><span class="line">                tail.next=temp;</span><br><span class="line">                tail=temp;</span><br><span class="line">                size++;</span><br><span class="line">            &#125;</span><br><span class="line">            //取代最不常使用的节点，改变其key与value即可</span><br><span class="line">            else&#123;</span><br><span class="line">            	//移除map</span><br><span class="line">                map.remove(head.next.key);</span><br><span class="line">                //取代节点</span><br><span class="line">                replace(head.next,key,value);</span><br><span class="line">                //添加map</span><br><span class="line">                map.put(key,tail);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //改变节点的位置，不替代节点的值</span><br><span class="line">    public void change(Link cur)&#123;</span><br><span class="line">        if(cur==tail) return;</span><br><span class="line">        cur.pre.next=cur.next;</span><br><span class="line">        cur.next.pre=cur.pre;</span><br><span class="line">        cur.pre=tail;</span><br><span class="line">        tail.next=cur;</span><br><span class="line">        tail=cur;</span><br><span class="line">        tail.next=null;</span><br><span class="line">    &#125;</span><br><span class="line">    //重新修改节点的属性，并且重新设置节点在链表的位置</span><br><span class="line">    public void replace(Link cur,int key,int value)&#123;</span><br><span class="line">        cur.key=key;</span><br><span class="line">        cur.val=value;</span><br><span class="line">        //节点在尾部，不需要改变位置</span><br><span class="line">        if(cur==tail) return;</span><br><span class="line">        cur.pre.next=cur.next;</span><br><span class="line">        cur.next.pre=cur.pre;</span><br><span class="line">        cur.pre=tail;</span><br><span class="line">        tail.next=cur;</span><br><span class="line">        tail=cur;</span><br><span class="line">        tail.next=null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到，我们只创建了指定容量的对象，对超出的对象属性修改进行修改即可。这样避免创建过多的对象，减少垃圾回收。</p>
+<p><strong>到了 JDK1.8 的时候已经摒弃了 Segment 的概念，而是直接用 Node 数组+链表+红黑树的数据结构来实现，并发控制使用 synchronized 和 CAS 来操作。</strong>（严重了使用锁）</p>
+
+      <div class="tags">
+          <a href="/tags/Java/" rel="tag"><i class="ic i-tag"></i> Java</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2022-04-15 12:41:44" itemprop="dateModified" datetime="2022-04-15T12:41:44+08:00">2022-04-15</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>Give me a cup of [coffee]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="导弹哥 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="导弹哥 Alipay">
+        <p>Alipay</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>导弹哥 <i class="ic i-at"><em>@</em></i>Hexo
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="http://example.com/2022/04/15/LRU%E7%BC%93%E5%AD%98/" title="LRU缓存一种节省资源的方式">http://example.com/2022/04/15/LRU缓存/</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/04/11/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%B0%8F%E8%AE%B0/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipew8gmvyj20zk0m87wh.jpg" title="Spring全家桶速记">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> </span>
+  <h3>Spring全家桶速记</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#LRU%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">LRU缓存的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E6%80%9D%E8%B7%AF"><span class="toc-number">3.</span> <span class="toc-text">新思路</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="导弹哥"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">导弹哥</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">5</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">1</span>
+        <span class="name">tags</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item email" data-url="bWFpbHRvOnlhbl94aWFuQGZveG1haWwuY29t" title="mailto:yan_xian@foxmail.com"><i class="ic i-envelope"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>Random Posts</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2022/04/11/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%B0%8F%E8%AE%B0/" title="Spring全家桶速记">Spring全家桶速记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2022/04/15/LRU%E7%BC%93%E5%AD%98/" title="LRU缓存一种节省资源的方式">LRU缓存一种节省资源的方式</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2022/04/04/Map%E9%80%9F%E8%AE%B0/" title="Map速记">Map速记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2022/04/06/http%E5%8D%8F%E8%AE%AE%E5%B0%8F%E8%AE%B0/" title="http协议小记">http协议小记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2022/02/04/%E5%B9%B6%E5%8F%91%E6%80%BB%E7%BB%93/" title="并发总结">并发总结</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>Recent Comments</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2022</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">导弹哥 @ 研究导弹茶叶蛋</span>
+  </div>
+  <div class="powered-by">
+    Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2022/04/15/LRU缓存/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>
